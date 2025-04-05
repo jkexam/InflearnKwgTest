@@ -4,7 +4,6 @@ import com.example.demo.repository.UserEntity;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 
@@ -28,6 +27,18 @@ public class UserServiceTest {
 
         //then
         assertThat(userEntity.getNickname()).isEqualTo("jkoogibook");
+        assertThat(userEntity.getEmail()).isEqualTo(email);
+    }
+    @Test
+    void getByEmail_Panding상태유저조회안됨() {
+        //given
+        String email = "jkoogibook1@gmail.com";
+
+        //when
+        UserEntity userEntity = userService.getByEmail(email);
+
+        //then
+        assertThat(userEntity.getNickname()).isEqualTo("jkoogibook1");
         assertThat(userEntity.getEmail()).isEqualTo(email);
     }
 }
