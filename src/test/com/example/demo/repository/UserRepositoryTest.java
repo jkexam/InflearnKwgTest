@@ -9,9 +9,6 @@ import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-//@SpringBootTest //Junit5에서 생략 가능
-//@ExtendWith(SpringExtension.class) //DataJpaTest에 내장
-//@TestPropertySource("classpath:test-application.properties") //기본설정
 @DataJpaTest(showSql = true)
 class UserRepositoryTest {
 
@@ -69,7 +66,6 @@ class UserRepositoryTest {
         Optional<UserEntity> result = userRepository.findByIdAndStatus(1L, UserStatus.PENDING);
 
         //then
-        assertThat(result.isPresent()).isFalse();
         assertThat(result.isEmpty()).isTrue();
     }
 
@@ -107,7 +103,6 @@ class UserRepositoryTest {
         Optional<UserEntity> result = userRepository.findByEmailAndStatus("jkoogibook@gmail.com", UserStatus.PENDING);
 
         //then
-        assertThat(result.isPresent()).isFalse();
         assertThat(result.isEmpty()).isTrue();
     }
 }
