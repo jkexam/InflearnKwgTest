@@ -48,4 +48,23 @@ public class UserServiceTest {
             userService.getByEmail(email);
         }).isInstanceOf(ResourceNotFoundException.class);
     }
+    @Test
+    void getById_Active상태유저조회() {
+        //given
+        //when
+        UserEntity userEntity = userService.getById(1);
+
+        //then
+        assertThat(userEntity.getNickname()).isEqualTo("jkoogibook");
+        assertThat(userEntity.getEmail()).isEqualTo("jkoogibook@gmail.com");
+    }
+    @Test
+    void getById_Panding상태유저조회안됨() {
+        //given
+        //when
+        //then
+        assertThatThrownBy(()->{
+            userService.getById(2);
+        }).isInstanceOf(ResourceNotFoundException.class);
+    }
 }
