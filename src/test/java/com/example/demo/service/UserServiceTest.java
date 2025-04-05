@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.UserEntity;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 @SpringBootTest
 @TestPropertySource("classpath:test-application.properties")
@@ -35,10 +37,10 @@ public class UserServiceTest {
         String email = "jkoogibook1@gmail.com";
 
         //when
-        UserEntity userEntity = userService.getByEmail(email);
 
         //then
-        assertThat(userEntity.getNickname()).isEqualTo("jkoogibook1");
-        assertThat(userEntity.getEmail()).isEqualTo(email);
+        assertThatThrownBy(()->{
+            userService.getByEmail(email);
+        }).isInstanceOf(ResourceNotFoundException.class);
     }
 }
