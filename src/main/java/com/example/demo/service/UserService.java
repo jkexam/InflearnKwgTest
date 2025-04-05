@@ -87,8 +87,8 @@ public class UserService {
 
         try {
             helper.setTo(email);
-            helper.setSubject("임시비밀번호 안내");
-            helper.setText("임시비밀번호: $temporaryPassword");
+            helper.setSubject("Please certify your email address");
+            helper.setText("Please click the following link to certify your email address: " + certificationUrl);
             helper.setFrom(fromEmail);
         } catch (MessagingException e) {
             throw new RuntimeException(e);
